@@ -13,16 +13,8 @@ resource "aws_instance" "instance1" {
     Enviroment = "${var.Enviroment}"
     Created_by = "{var.Created_by}"
 } 
-
-lifecycle {
   
-   tags {
-    Name = "{var.appname}"
-    Enviroment = "${var.Enviroment}"
-    Created_by = "{var.Created_by}"
-    prevent_destroy = "false"
-  }
- }
+}
  
 
 #DB host
@@ -33,13 +25,11 @@ resource "aws_instance" "instance2" {
   subnet_id              = "${aws_subnet.artemis-private.id}"
   vpc_security_group_ids = ["${aws_security_group.artemis.id}"]
   user_data              = "${file("db.sh")}"
-}
+
    tags {
     Name = "{var.appname}"
     Enviroment = "${var.Enviroment}"
     Created_by = "{var.Created_by}"
 }
-lifecycle {
-   prevent_destroy = "false"
 }
-}
+
